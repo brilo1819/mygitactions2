@@ -1,0 +1,28 @@
+name: Cache Prime Workflow
+
+on: [push]
+
+jobs:
+  cache-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: prime-cache-f36f44b
+        uses: actions/cache@v4
+        id: cache-step
+        with:
+          path: ~/.cache/pip
+          key: cache-f36f44b
+
+      - name: Echo cache result
+        run: |
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit for cache-f36f44b"
+          else
+            echo "Cache miss for cache-f36f44b"
+          fi
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
