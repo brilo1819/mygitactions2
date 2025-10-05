@@ -23,6 +23,3 @@ jobs:
           else
             echo "Cache miss for cache-f36f44b"
           fi
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
